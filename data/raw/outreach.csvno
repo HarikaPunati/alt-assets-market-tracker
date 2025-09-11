@@ -1,0 +1,5 @@
+outreach_id,firm_id,contact_role,date,channel,outcome,notes
+O001,F001,IR Director,2024-11-12,Email,Confirmed,Validated Fund III target size
+O002,F002,Associate,2025-03-08,Call,Pending,Requested follow-up on seed fund close
+O003,F003,Partner,2025-05-21,Email,Confirmed,Provided transaction date correction
+

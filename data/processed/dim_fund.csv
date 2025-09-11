@@ -1,0 +1,6 @@
+fund_id,firm_id,fund_name,fund_type,vintage_year,target_size_usd,status
+U101,F001,NorthPeak Fund III,Buyout,2021,1200000000,Investing
+U102,F001,NorthPeak Fund II,Buyout,2018,900000000,Harvesting
+V201,F002,RiverStone Seed Fund I,Venture,2022,150000000,Fundraising
+G301,F003,EGP Growth II,Growth Equity,2020,700000000,Investing
+V401,F004,Saffron Hill Ventures I,Venture,2023,200000000,Fundraising

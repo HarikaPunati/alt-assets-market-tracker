@@ -1,0 +1,7 @@
+tx_id,fund_id,firm_id,date,sector,subsector,country,region,stage,amount_original,currency,amount_usd,source,confidence_score
+T900,U101,F001,2023-07-15,Healthcare,MedTech,United States,North America,Growth,85000000,USD,85000000,Press Release,0.9
+T901,U102,F001,2021-02-03,Technology,SaaS,United States,North America,Buyout,250000000,USD,250000000,Company Website,0.8
+T902,V201,F002,2024-10-21,Consumer,Ecommerce,United Kingdom,Europe,Seed,5000000,GBP,6200000,News,0.7
+T903,G301,F003,2022-06-10,Energy,Renewables,Germany,Europe,Growth,42000000,EUR,45000000,Regulatory Filing,0.85
+T904,,F004,2025-01-12,Technology,SaaS,India,Asia,Early,120000000,INR,1450000,Press,0.6
+

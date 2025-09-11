@@ -1,0 +1,6 @@
+tx_id,fund_id,firm_id,date,sector_id,geo_id,stage,amount_usd,source,confidence_score
+T900,U101,F001,2023-07-15,1,1,Growth,85000000,Press Release,0.9
+T901,U102,F001,2021-02-03,2,1,Buyout,250000000,Company Website,0.8
+T902,V201,F002,2024-10-21,4,2,Seed,6200000,News,0.7
+T903,G301,F003,2022-06-10,3,3,Growth,45000000,Regulatory Filing,0.85
+T904,,F004,2025-01-12,2,4,Early,1450000,Press,0.6

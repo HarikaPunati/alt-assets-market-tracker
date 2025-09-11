@@ -1,0 +1,8 @@
+metric,value
+firms_completeness_pct,100.0
+funds_completeness_pct,100.0
+txs_completeness_pct,100.0
+duplicate_firms,0.0
+orphan_funds,0.0
+txs_bad_dates,0.0
+txs_negative_amounts,0.0
