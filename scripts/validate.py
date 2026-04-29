@@ -1,21 +1,48 @@
+import logging
 import os
+import sys
+
 import pandas as pd
 from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 from dateutil.parser import parse as parse_date
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)-8s  %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
+log = logging.getLogger(__name__)
 
 DB_PATH = "tracker.db"
 OUT_DIR = "qa/reports"
 
+STAGING_TABLES = ["stg_firm", "stg_fund", "stg_transaction"]
+
+
 def pct_required(df, req_cols):
     return round(100 * (df[req_cols].notnull().all(axis=1).mean()), 2)
 
+
+def read_staging_table(conn, table_name):
+    try:
+        return pd.read_sql(f"SELECT * FROM {table_name}", conn)
+    except SQLAlchemyError as exc:
+        log.error("Failed to read staging table '%s': %s", table_name, exc)
+        sys.exit(1)
+
+
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    eng = create_engine(f"sqlite:///{DB_PATH}", future=True)
-    with eng.begin() as c:
-        firms = pd.read_sql("SELECT * FROM stg_firm", c)
-        funds = pd.read_sql("SELECT * FROM stg_fund", c)
-        txs   = pd.read_sql("SELECT * FROM stg_transaction", c)
+    try:
+        eng = create_engine(f"sqlite:///{DB_PATH}", future=True)
+        with eng.begin() as c:
+            firms = read_staging_table(c, "stg_firm")
+            funds = read_staging_table(c, "stg_fund")
+            txs   = read_staging_table(c, "stg_transaction")
+    except SQLAlchemyError as exc:
+        log.error("Failed to connect to database '%s': %s", DB_PATH, exc)
+        sys.exit(1)
 
     comp_firms = pct_required(firms, ["firm_id","name","hq_country"])
     comp_funds = pct_required(funds, ["fund_id","firm_id","fund_name"])
@@ -43,8 +70,8 @@ def main():
         {"metric":"txs_negative_amounts","value":int(neg_amts)},
     ])
     summary.to_csv(os.path.join(OUT_DIR, "quality_summary.csv"), index=False)
-    print("Validation complete → qa/reports/quality_summary.csv")
+    log.info("Validation complete → qa/reports/quality_summary.csv")
+
 
 if __name__ == "__main__":
     main()
-
